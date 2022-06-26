@@ -93,7 +93,7 @@ public class Loader implements ResourceManagerReloadListener {
 	private void loadProgramSpecs(ResourceManager manager) {
 		programs.clear();
 
-		Collection<ResourceLocation> programSpecs = manager.listResources(PROGRAM_DIR, s -> s.endsWith(".json"));
+		Collection<ResourceLocation> programSpecs = (Collection<ResourceLocation>) manager.listResources(PROGRAM_DIR, s -> s.getPath().endsWith(".json"));
 
 		for (ResourceLocation location : programSpecs) {
 			try {

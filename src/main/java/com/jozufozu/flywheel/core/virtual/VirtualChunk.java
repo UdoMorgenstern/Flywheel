@@ -28,7 +28,8 @@ import net.minecraft.world.level.chunk.ChunkStatus;
 import net.minecraft.world.level.chunk.LevelChunkSection;
 import net.minecraft.world.level.chunk.UpgradeData;
 import net.minecraft.world.level.levelgen.Heightmap;
-import net.minecraft.world.level.levelgen.feature.ConfiguredStructureFeature;
+//import net.minecraft.world.level.levelgen.feature.ConfiguredStructureFeature;
+import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.levelgen.structure.StructureStart;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
@@ -192,7 +193,7 @@ public class VirtualChunk extends ChunkAccess {
 		return null;
 	}
 
-	@Override
+	/*@Override
 	@Nullable
 	public StructureStart getStartForFeature(ConfiguredStructureFeature<?, ?> pStructure) {
 		return null;
@@ -200,33 +201,33 @@ public class VirtualChunk extends ChunkAccess {
 
 	@Override
 	public void setStartForFeature(ConfiguredStructureFeature<?, ?> pStructure, StructureStart pStart) {
-	}
+	}*/
 
 	@Override
-	public Map<ConfiguredStructureFeature<?, ?>, StructureStart> getAllStarts() {
+	public Map<Structure, StructureStart>getAllStarts() {
 		return Collections.emptyMap();
 	}
 
 	@Override
-	public void setAllStarts(Map<ConfiguredStructureFeature<?, ?>, StructureStart> pStructureStarts) {
+	public void setAllStarts(Map<Structure, StructureStart> pStructureStarts) {
 	}
 
 	@Override
-	public LongSet getReferencesForFeature(ConfiguredStructureFeature<?, ?> pStructure) {
+	public LongSet getReferencesForFeature(Structure pStructure) {
 		return LongSets.emptySet();
 	}
 
 	@Override
-	public void addReferenceForFeature(ConfiguredStructureFeature<?, ?> pStructure, long pReference) {
+	public void addReferenceForFeature(Structure pStructure, long pReference) {
 	}
 
 	@Override
-	public Map<ConfiguredStructureFeature<?, ?>, LongSet> getAllReferences() {
+	public Map<Structure, LongSet> getAllReferences() {
 		return Collections.emptyMap();
 	}
 
 	@Override
-	public void setAllReferences(Map<ConfiguredStructureFeature<?, ?>, LongSet> pStructureReferences) {
+	public void setAllReferences(Map<Structure, LongSet> pStructureReferences) {
 	}
 
 	@Override

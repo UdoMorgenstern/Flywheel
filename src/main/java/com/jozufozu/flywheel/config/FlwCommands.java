@@ -16,7 +16,6 @@ import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraftforge.client.event.RegisterClientCommandsEvent;
 import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
 import net.minecraftforge.fml.ModList;
@@ -56,14 +55,14 @@ public class FlwCommands {
 					LocalPlayer player = Minecraft.getInstance().player;
 					if (player == null) return;
 
-					Component text = new TextComponent("Normal debug mode is currently: ").append(boolToText(bool));
+					Component text = Component.translatable("Normal debug mode is currently: ").append(boolToText(bool));
 					player.displayClientMessage(text, false);
 				},
 				(source, bool) -> {
 					LocalPlayer player = Minecraft.getInstance().player;
 					if (player == null) return;
 
-					Component text = boolToText(bool).append(new TextComponent(" normal debug mode").withStyle(ChatFormatting.WHITE));
+					Component text = boolToText(bool).append(Component.translatable(" normal debug mode").withStyle(ChatFormatting.WHITE));
 					player.displayClientMessage(text, false);
 				}
 			));
@@ -73,14 +72,14 @@ public class FlwCommands {
 					LocalPlayer player = Minecraft.getInstance().player;
 					if (player == null) return;
 
-					Component text = new TextComponent("Update limiting is currently: ").append(boolToText(bool));
+					Component text = Component.translatable("Update limiting is currently: ").append(boolToText(bool));
 					player.displayClientMessage(text, false);
 				},
 				(source, bool) -> {
 					LocalPlayer player = Minecraft.getInstance().player;
 					if (player == null) return;
 
-					Component text = boolToText(bool).append(new TextComponent(" update limiting.").withStyle(ChatFormatting.WHITE));
+					Component text = boolToText(bool).append(Component.translatable(" update limiting.").withStyle(ChatFormatting.WHITE));
 					player.displayClientMessage(text, false);
 
 					Backend.reloadWorldRenderers();
@@ -111,20 +110,20 @@ public class FlwCommands {
 	}
 
 	public static MutableComponent boolToText(boolean b) {
-		return b ? new TextComponent("enabled").withStyle(ChatFormatting.DARK_GREEN) : new TextComponent("disabled").withStyle(ChatFormatting.RED);
+		return b ? Component.translatable("enabled").withStyle(ChatFormatting.DARK_GREEN) : Component.translatable("disabled").withStyle(ChatFormatting.RED);
 	}
 
 	public static Component getEngineMessage(@NotNull BackendType type) {
 		return switch (type) {
-			case OFF -> new TextComponent("Disabled Flywheel").withStyle(ChatFormatting.RED);
-			case INSTANCING -> new TextComponent("Using Instancing Engine").withStyle(ChatFormatting.GREEN);
+			case OFF -> Component.translatable("Disabled Flywheel").withStyle(ChatFormatting.RED);
+			case INSTANCING -> Component.translatable("Using Instancing Engine").withStyle(ChatFormatting.GREEN);
 			case BATCHING -> {
-				MutableComponent msg = new TextComponent("Using Batching Engine").withStyle(ChatFormatting.GREEN);
+				MutableComponent msg = Component.translatable("Using Batching Engine").withStyle(ChatFormatting.GREEN);
 
 				if (ModList.get()
 						.isLoaded("create")) {
 					// FIXME: batching engine contraption lighting issues
-					msg.append(new TextComponent("\nWARNING: May cause issues with Create Contraptions").withStyle(ChatFormatting.RED));
+					msg.append(Component.translatable("\nWARNING: May cause issues with Create Contraptions").withStyle(ChatFormatting.RED));
 				}
 
 				yield msg;

@@ -1,5 +1,11 @@
 package com.jozufozu.flywheel;
 
+import net.minecraft.commands.synchronization.ArgumentTypeInfo;
+
+import net.minecraft.commands.synchronization.ArgumentTypeInfos;
+import net.minecraft.core.Registry;
+import net.minecraftforge.registries.DeferredRegister;
+
 import org.apache.maven.artifact.versioning.ArtifactVersion;
 import org.slf4j.Logger;
 
@@ -17,8 +23,6 @@ import com.jozufozu.flywheel.mixin.PausedPartialTickAccessor;
 import com.jozufozu.flywheel.vanilla.VanillaInstances;
 import com.mojang.logging.LogUtils;
 
-import net.minecraft.commands.synchronization.ArgumentTypes;
-import net.minecraft.commands.synchronization.EmptyArgumentSerializer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -88,7 +92,9 @@ public class Flywheel {
 	}
 
 	private static void setup(final FMLCommonSetupEvent event) {
-		ArgumentTypes.register(rl("engine").toString(), BackendTypeArgument.class, new EmptyArgumentSerializer<>(BackendTypeArgument::getInstance));
+		//ArgumentTypes.register(rl("engine").toString(), BackendTypeArgument.class, new EmptyArgumentSerializer<>(BackendTypeArgument::getInstance));
+		DeferredRegister<ArgumentTypeInfo<?, ?>> argTypeRegistry = DeferredRegister.create(Registry.COMMAND_ARGUMENT_TYPE_REGISTRY, Flywheel.ID);
+		argTypeRegistry.register(rl("engine").toString(), () -> ArgumentTypeInfos.registerByClass(BackendTypeArgument.class, new BackendTypeArgument.Info()));
 	}
 
 	public static ArtifactVersion getVersion() {
